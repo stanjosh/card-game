@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://ck461gnbuhubp"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_83mcs"]
+
+[resource]
+script = ExtResource("1_83mcs")
+title = "Graveyard"
+description = "The dead are mostly buried here."
+rarity = 0.6
+pattern = 6

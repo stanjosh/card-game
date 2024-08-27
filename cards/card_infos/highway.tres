@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://c8c0hmy7o7gjr"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_bu513"]
+
+[resource]
+script = ExtResource("1_bu513")
+title = "Highway"
+description = "Four lanes of freedom."
+rarity = 0.24
+pattern = 4

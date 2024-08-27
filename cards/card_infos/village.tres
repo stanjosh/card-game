@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://0ylejhpg3ycc"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_k3hkq"]
+
+[resource]
+script = ExtResource("1_k3hkq")
+title = "Village"
+description = "Some makeshift living spaces around a communal fire."
+rarity = 0.8
+pattern = 1

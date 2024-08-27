@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://cpfupagkdo2rx"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_5o3u0"]
+
+[resource]
+script = ExtResource("1_5o3u0")
+title = "Lake"
+description = "Serene and blue like the sky."
+rarity = 0.432
+pattern = 0

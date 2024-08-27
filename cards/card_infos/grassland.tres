@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://dc7upsb8t120w"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_vypp7"]
+
+[resource]
+script = ExtResource("1_vypp7")
+title = "Grassland"
+description = "A large, somewhat flat, clearing."
+rarity = 0.0
+pattern = 3

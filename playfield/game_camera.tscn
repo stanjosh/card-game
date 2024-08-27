@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuudigdy0md3h"]
+
+[ext_resource type="Script" path="res://playfield/game_camera.gd" id="1_kwwwo"]
+
+[node name="GameCamera" type="Camera2D"]
+physics_interpolation_mode = 1
+editor_draw_limits = true
+script = ExtResource("1_kwwwo")

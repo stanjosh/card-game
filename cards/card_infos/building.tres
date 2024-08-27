@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://c3tuik5t1dlnf"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_xejqv"]
+
+[resource]
+script = ExtResource("1_xejqv")
+title = "Building"
+description = "Temporary refuge"
+rarity = 0.4
+pattern = 5

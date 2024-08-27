@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=2 format=3 uid="uid://fyy3vpbs345i"]
+
+[ext_resource type="Script" path="res://cards/scripts/card_info.gd" id="1_ub247"]
+
+[resource]
+script = ExtResource("1_ub247")
+title = "Default Card"
+description = "Could be better."
+rarity = 0.9
+pattern = 7
