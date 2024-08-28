@@ -6,17 +6,17 @@
 [ext_resource type="Script" path="res://common/background.gd" id="4_385ld"]
 [ext_resource type="TileSet" uid="uid://biisv2bncp16r" path="res://common/tiles.tres" id="5_ugfju"]
 
-[sub_resource type="Gradient" id="Gradient_sgjsm"]
+[sub_resource type="Gradient" id="Gradient_pa5kq"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.571931, 0.484295, 0.578274, 1, 0.796078, 0.47451, 0, 1, 0.382133, 0.487668, 0.460821, 1, 1, 1, 1, 1, 0.571931, 0.484295, 0.578274, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sbxmu"]
-gradient = SubResource("Gradient_sgjsm")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mbywx"]
+gradient = SubResource("Gradient_pa5kq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xm1lh"]
 shader = ExtResource("3_k3vph")
 shader_parameter/speed_scale = 0.079
-shader_parameter/gradient = SubResource("GradientTexture1D_sbxmu")
+shader_parameter/gradient = SubResource("GradientTexture1D_mbywx")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wxq2s"]
 seed = 2
@@ -58,11 +58,8 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CardFace" type="TextureRect" parent="Container2"]
-visible = false
 clip_children = 2
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
 mouse_filter = 2
 texture = ExtResource("2_umcw8")
 expand_mode = 3

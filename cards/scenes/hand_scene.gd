@@ -53,7 +53,7 @@ func update(hand : Array[CardInfo], _deck, _discard_pile) -> void:
 	arrange_cards()
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	print("ok")
+	print("can drop on hand")
 	return data is Card2D
 	
 func _drop_data(_at_position: Vector2, data: Variant) -> void:

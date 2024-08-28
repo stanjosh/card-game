@@ -2,6 +2,7 @@ extends TileMapLayer
 class_name RandomTerrainMap
 
 
+
 @export var terrain_noise : FastNoiseLite = FastNoiseLite.new() :
 	set(value):
 		terrain_noise = value
@@ -17,7 +18,6 @@ class_name RandomTerrainMap
 var generating_terrain : bool = false
 
 func _ready() -> void:
-	
 	generate_terrain()
 
 func _process(delta: float) -> void:

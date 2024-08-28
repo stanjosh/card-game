@@ -2,7 +2,6 @@
 
 [ext_resource type="Shader" path="res://common/background.gdshader" id="1_4d7jv"]
 [ext_resource type="PackedScene" uid="uid://nwlh04kegwuj" path="res://playfield/playfield.tscn" id="1_13mft"]
-[ext_resource type="Script" path="res://playfield/play_area_container.gd" id="2_mc0ra"]
 [ext_resource type="PackedScene" uid="uid://dooi0d7kgo22v" path="res://cards/scenes/hand_scene.tscn" id="3_4r87u"]
 [ext_resource type="PackedScene" uid="uid://b7hq8ip13xbbu" path="res://cards/scenes/deck_scene.tscn" id="4_sboco"]
 [ext_resource type="PackedScene" uid="uid://d5bnn72kug0k" path="res://cards/scenes/discard_pile_scene.tscn" id="5_qosu5"]
@@ -29,6 +28,10 @@ generate_mipmaps = false
 seamless = true
 noise = SubResource("FastNoiseLite_ipml7")
 
+[sub_resource type="GDScript" id="GDScript_fva8q"]
+script/source = "extends CanvasLayer
+"
+
 [sub_resource type="Curve" id="Curve_iqjtq"]
 
 [node name="Root" type="Node"]
@@ -43,87 +46,79 @@ grow_vertical = 2
 texture = SubResource("NoiseTexture2D_x2a1v")
 stretch_mode = 1
 
-[node name="PlayfieldControl" parent="." instance=ExtResource("1_13mft")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 1152.0
-offset_bottom = 547.0
-size_flags_horizontal = 3
+[node name="PlayArea" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_fva8q")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PlayAreaContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
+[node name="PlayAreaContainer" type="VBoxContainer" parent="PlayArea"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -97.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 mouse_filter = 2
-script = ExtResource("2_mc0ra")
 
-[node name="GardGrid" type="GridContainer" parent="CanvasLayer/PlayAreaContainer"]
+[node name="PlayfieldControl" parent="PlayArea/PlayAreaContainer" instance=ExtResource("1_13mft")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
+stretch_shrink = 2
+
+[node name="GardGrid" type="GridContainer" parent="PlayArea/PlayAreaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 columns = 3
 
-[node name="Deck" parent="CanvasLayer/PlayAreaContainer/GardGrid" instance=ExtResource("4_sboco")]
+[node name="Deck" parent="PlayArea/PlayAreaContainer/GardGrid" instance=ExtResource("4_sboco")]
 layout_mode = 2
 
-[node name="Hand" parent="CanvasLayer/PlayAreaContainer/GardGrid" instance=ExtResource("3_4r87u")]
+[node name="Hand" parent="PlayArea/PlayAreaContainer/GardGrid" instance=ExtResource("3_4r87u")]
 layout_mode = 2
 position_curve = SubResource("Curve_iqjtq")
 
-[node name="DiscardPile" parent="CanvasLayer/PlayAreaContainer/GardGrid" instance=ExtResource("5_qosu5")]
+[node name="DiscardPile" parent="PlayArea/PlayAreaContainer/GardGrid" instance=ExtResource("5_qosu5")]
 layout_mode = 2
 
-[node name="DebugWindow" type="Node2D" parent="CanvasLayer"]
+[node name="DebugWindow" type="Node2D" parent="PlayArea"]
 visible = false
 script = ExtResource("6_ybe8k")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugWindow"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayArea/DebugWindow"]
 offset_right = 222.0
 offset_bottom = 93.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/DebugWindow/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PlayArea/DebugWindow/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/DebugWindow/VBoxContainer/PanelContainer"]
+[node name="Label" type="Label" parent="PlayArea/DebugWindow/VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Debug"
 
-[node name="Debug" type="GridContainer" parent="CanvasLayer/DebugWindow/VBoxContainer"]
+[node name="Debug" type="GridContainer" parent="PlayArea/DebugWindow/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="NewDeckButton" type="Button" parent="CanvasLayer/DebugWindow/VBoxContainer/Debug"]
+[node name="NewDeckButton" type="Button" parent="PlayArea/DebugWindow/VBoxContainer/Debug"]
 layout_mode = 2
 text = "make new deck"
 
-[node name="DrawCardButton" type="Button" parent="CanvasLayer/DebugWindow/VBoxContainer/Debug"]
+[node name="DrawCardButton" type="Button" parent="PlayArea/DebugWindow/VBoxContainer/Debug"]
 layout_mode = 2
 text = "Draw Card"
 
-[node name="NewHandButton" type="Button" parent="CanvasLayer/DebugWindow/VBoxContainer/Debug"]
+[node name="NewHandButton" type="Button" parent="PlayArea/DebugWindow/VBoxContainer/Debug"]
 layout_mode = 2
 text = "new hand
 "
 
-[node name="ShuffleAllButton" type="Button" parent="CanvasLayer/DebugWindow/VBoxContainer/Debug"]
+[node name="ShuffleAllButton" type="Button" parent="PlayArea/DebugWindow/VBoxContainer/Debug"]
 layout_mode = 2
 text = "shuffle all
 "
 
-[connection signal="gui_input" from="CanvasLayer/DebugWindow/VBoxContainer/PanelContainer" to="CanvasLayer/DebugWindow" method="_on_panel_container_gui_input"]
-[connection signal="pressed" from="CanvasLayer/DebugWindow/VBoxContainer/Debug/NewDeckButton" to="CanvasLayer/DebugWindow" method="_on_new_deck_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/DebugWindow/VBoxContainer/Debug/DrawCardButton" to="CanvasLayer/DebugWindow" method="_on_draw_card_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/DebugWindow/VBoxContainer/Debug/NewHandButton" to="CanvasLayer/DebugWindow" method="_on_new_hand_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/DebugWindow/VBoxContainer/Debug/ShuffleAllButton" to="CanvasLayer/DebugWindow" method="_on_shuffle_all_button_pressed"]
-
-[editable path="PlayfieldControl"]
+[connection signal="gui_input" from="PlayArea/DebugWindow/VBoxContainer/PanelContainer" to="PlayArea/DebugWindow" method="_on_panel_container_gui_input"]
+[connection signal="pressed" from="PlayArea/DebugWindow/VBoxContainer/Debug/NewDeckButton" to="PlayArea/DebugWindow" method="_on_new_deck_button_pressed"]
+[connection signal="pressed" from="PlayArea/DebugWindow/VBoxContainer/Debug/DrawCardButton" to="PlayArea/DebugWindow" method="_on_draw_card_button_pressed"]
+[connection signal="pressed" from="PlayArea/DebugWindow/VBoxContainer/Debug/NewHandButton" to="PlayArea/DebugWindow" method="_on_new_hand_button_pressed"]
+[connection signal="pressed" from="PlayArea/DebugWindow/VBoxContainer/Debug/ShuffleAllButton" to="PlayArea/DebugWindow" method="_on_shuffle_all_button_pressed"]

@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://nwlh04kegwuj"]
+[gd_scene load_steps=6 format=3 uid="uid://nwlh04kegwuj"]
 
 [ext_resource type="Script" path="res://playfield/playfield.gd" id="1_g7wqk"]
+[ext_resource type="PackedScene" uid="uid://cuudigdy0md3h" path="res://playfield/game_camera.tscn" id="1_vnkfy"]
 [ext_resource type="TileSet" uid="uid://biisv2bncp16r" path="res://common/tiles.tres" id="1_xfesn"]
-[ext_resource type="Script" path="res://playfield/random_tile_map.gd" id="3_65ow6"]
+[ext_resource type="Script" path="res://playfield/random_terrain_map.gd" id="3_65ow6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_snyb2"]
-noise_type = 2
-frequency = 0.0131
+noise_type = 3
+frequency = 0.1205
 
-[node name="PlayfieldContainer" type="ScrollContainer"]
+[node name="PlayfieldContainer" type="SubViewportContainer"]
 clip_children = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,17 +17,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+stretch = true
 script = ExtResource("1_g7wqk")
 
-[node name="PlayfieldTileMap" type="TileMapLayer" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="GameCamera" parent="SubViewport" instance=ExtResource("1_vnkfy")]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)
+
+[node name="PlayfieldTileMap" type="TileMapLayer" parent="SubViewport"]
 texture_filter = 1
 tile_set = ExtResource("1_xfesn")
 script = ExtResource("3_65ow6")
 terrain_noise = SubResource("FastNoiseLite_snyb2")
-
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
+terrain_level = 0.038

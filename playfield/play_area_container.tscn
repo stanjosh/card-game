@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://bue7pnnu8b54a"]
+
+[ext_resource type="PackedScene" uid="uid://b7hq8ip13xbbu" path="res://cards/scenes/deck_scene.tscn" id="2_4nm63"]
+[ext_resource type="PackedScene" uid="uid://dooi0d7kgo22v" path="res://cards/scenes/hand_scene.tscn" id="3_2pyha"]
+[ext_resource type="PackedScene" uid="uid://d5bnn72kug0k" path="res://cards/scenes/discard_pile_scene.tscn" id="4_uqv8i"]
+
+[sub_resource type="GDScript" id="GDScript_ybor2"]
+script/source = "extends VBoxContainer
+
+signal card_played(card_info : CardInfo)
+
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+	return data is Card2D
+	
+func _drop_data(_at_position: Vector2, data: Variant) -> void:
+	card_played.emit(data.card_info)
+"
+
+[sub_resource type="Curve" id="Curve_iqjtq"]
+
+[node name="PlayAreaContainer" type="VBoxContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -97.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 10
+mouse_filter = 2
+script = SubResource("GDScript_ybor2")
+
+[node name="GardGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 2
+columns = 3
+
+[node name="Deck" parent="GardGrid" instance=ExtResource("2_4nm63")]
+layout_mode = 2
+
+[node name="Hand" parent="GardGrid" instance=ExtResource("3_2pyha")]
+layout_mode = 2
+position_curve = SubResource("Curve_iqjtq")
+
+[node name="DiscardPile" parent="GardGrid" instance=ExtResource("4_uqv8i")]
+layout_mode = 2

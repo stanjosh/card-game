@@ -2,19 +2,22 @@ extends Camera2D
 
 
 func set_camera_limits(rect: Rect2) -> void:
-	limit_top = rect.position.y
-	limit_bottom = rect.end.y
-	limit_left = rect.position.x
-	limit_right = rect.end.x
-	position = rect.get_center()
+	
+	limit_top = to_global(rect.position).y
+	limit_bottom = to_global(rect.end).y
+	limit_left = to_global(rect.position).x
+	limit_right = to_global(rect.end).x
+	
 	
 var is_dragging : bool = false
-var target_position : Vector2 = position
+var target_position : Vector2
 var target_zoom : Vector2 = zoom :
 	set(value):
 		target_zoom = clamp(value, Vector2(1, 1), Vector2(3, 3))
-		target_position = get_global_mouse_position()
+		target_position = to_global(get_local_mouse_position())
 
+func _ready() -> void:
+	target_position = get_viewport_rect().get_center()
 
 func _process(delta: float) -> void:
 	position = lerp(position, target_position, 5 * delta)

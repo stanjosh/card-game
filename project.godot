@@ -18,7 +18,6 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 Settings="*res://common/settings.gd"
 Cards="*res://cards/scripts/Cards.gd"
-GameCamera="*res://playfield/game_camera.tscn"
 Playfield="*res://playfield/playfield.tscn"
 
 [rendering]
