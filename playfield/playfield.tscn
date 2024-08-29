@@ -7,7 +7,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_snyb2"]
 noise_type = 3
-frequency = 0.1205
+frequency = 0.0442
 
 [node name="PlayfieldContainer" type="SubViewportContainer"]
 clip_children = 2
@@ -30,7 +30,15 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 zoom = Vector2(2, 2)
 
-[node name="PlayfieldTileMap" type="TileMapLayer" parent="SubViewport"]
+[node name="Dirt" type="TileMapLayer" parent="SubViewport"]
+texture_filter = 1
+tile_set = ExtResource("1_xfesn")
+script = ExtResource("3_65ow6")
+terrain_type = 1
+terrain_noise = SubResource("FastNoiseLite_snyb2")
+terrain_level = 0.038
+
+[node name="Water" type="TileMapLayer" parent="SubViewport"]
 texture_filter = 1
 tile_set = ExtResource("1_xfesn")
 script = ExtResource("3_65ow6")

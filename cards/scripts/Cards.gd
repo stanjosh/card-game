@@ -86,6 +86,14 @@ func discard_cards(cards : Array[int]) -> void:
 		discard_pile.push_back(card)
 	cards_updated.emit(hand, deck, discard_pile)
 	
+func play_card(cards : Array[int]) -> void:
+	prints("play array of size", cards.size())
+	for index in cards:
+		var card = hand.pop_at(index)
+		card.call("effect")
+		discard_pile.push_back(card)
+	cards_updated.emit(hand, deck, discard_pile)
+	
 func shuffle_deck(include_discard : bool = false, include_hand : bool = false) -> Array[CardInfo]:
 	if include_discard:
 		deck += discard_pile
